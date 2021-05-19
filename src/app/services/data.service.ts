@@ -12,6 +12,7 @@ export class DataService {
     1002: { acno: 1002,  username: "userthree", password: "userthree", balance: 10000 },
     1003: { acno: 1003,  username: "userfour", password: "userfour", balance: 6000 }
   };
+  // withdraw: any;
 
   constructor() { }
   
@@ -54,6 +55,57 @@ login(acno:any,pswd:any){
     return false;
   }
 }
+deposit(acno:any,pswd:any,amt:any){
+  var amount=parseInt(amt)
+  let user=this.accountDetails;
+  if (acno in user){
+    if(pswd == user[acno]["password"]){
+      user[acno]["balance"]+=amount;
+      return user[acno]["balance"];
+    }
+    else{
+      alert("incorrect password")
+    return false;
+    }
 
+  }
 
+else{
+  alert("invalid account")
+  return false;
 }
+}
+
+withdraw(acno:any,pswd:any,amt:any){
+  var amount=parseInt(amt)
+  let user=this.accountDetails;
+  if (acno in user){
+    if(pswd == user[acno]["password"]){
+
+
+      if(user[acno]["balance"]>amount){
+        user[acno]["balance"]-=amount;
+      return user[acno]["balance"];
+    }
+    else{
+      alert("in balance")
+    return false;
+    }
+
+  }
+
+else{
+  alert("incrct pswd")
+  return false;
+}
+}
+else{
+  alert("inv acnt")
+  return false;
+}
+}
+}
+// function accno(accno: any, any: any, pswd: any, any: any, amt: any, any: any) {
+//   throw new Error('Function not implemented.');
+// }
+

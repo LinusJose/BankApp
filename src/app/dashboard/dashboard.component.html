@@ -5,10 +5,10 @@
         <div class="col-4"></div>
             <div class="main"></div>
                 <h4>Deposit Form</h4><br>
-                    <form action="#">
-                        <input id="log" type="text"  class="text" placeholder="Account number"> <br><br><br>
-                    <input id="pass" type="password"  class="text"  placeholder="Password"><br><br>
-                    <input id="amo" type="text"  class="text"  placeholder="Amount"><br><br>
+                    <form (ngSubmit)="deposit()">
+                        <input id="log" type="text"  class="text" name="accno"[(ngModel)]="dAccno"placeholder="Account number"> <br><br><br>
+                    <input id="pass" type="password"  class="text" name="pswd"[(ngModel)]="dPswd" placeholder="Password"><br><br>
+                    <input id="amo" type="text"  class="text" name="amount" [(ngModel)]="dAmount" placeholder="Amount"><br><br>
 
                     <input type="submit" value="Deposit" class="button butefct"><br><br>
                     </form>
@@ -23,13 +23,13 @@
                 <div class="col-4"></div>
                 <div class="col-4"></div>
                     <div class="main"></div>
-                        <h4>Withdrawal Form</h4><br>
-                            <form action="#">
-                                <input id="log" type="text"  class="text" placeholder="Account number"> <br><br><br>
-                                <input id="pass" type="password"  class="text"  placeholder="Password"><br><br>
-                                <input id="amo" type="text"  class="text"  placeholder="Amount"><br><br>
+                        <h4>Withdraw Form</h4><br>
+                            <form (ngSubmit)="withdraw()">
+                                <input id="log" type="text"  class="text" name="accno"[(ngModel)]="wAccno" placeholder="Account number"> <br><br><br>
+                                <input id="pass" type="password"  class="text" name="pswd"[(ngModel)]="wPswd"  placeholder="Password"><br><br>
+                                <input id="amo" type="text"  class="text" name="amount" [(ngModel)]="wAmount"  placeholder="Amount"><br><br>
             
-                                <input type="submit" value="Withdrawal" class="button butefct"><br><br>
+                                <input type="submit" value="withdraw" class="button butefct"><br><br>
                                 </form>
                         <!-- </div> -->
                     </div>
