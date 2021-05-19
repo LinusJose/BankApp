@@ -21,19 +21,29 @@ register(){
   var uname=this.uname;
   var acno=this.acno;
   var pswd=this.pswd;
-let user=this.dataService.accountDetails;
-if(acno in user ){
-  alert("user exists...pl login")
-}
-else{
-  user[acno]={
-    acno,
-    username:uname,
-    password:pswd,
-    balance:0
-}
-alert("account created");
-this.router.navigateByUrl("")
-}
+  const result=this.dataService.register(uname,acno,pswd)
+  if(result){
+    alert("Registration Successfull");
+  
+    this.router.navigateByUrl("")
+  }
+  else{
+    alert("user exists...pl login")
+
+  }
+// let user=this.dataService.accountDetails;
+// if(acno in user ){
+//   alert("user exists...pl login")
+// }
+// else{
+//   user[acno]={
+//     acno,
+//     username:uname,
+//     password:pswd,
+//     balance:0
+// }
+// alert("Registration Successfull");
+// this.router.navigateByUrl("")
+// }
 }
 }

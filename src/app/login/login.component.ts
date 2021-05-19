@@ -23,21 +23,26 @@ pswd="";
   login(){
   var acno = this.acno;
   var pswd=this.pswd;
-  let users=this.dataService.accountDetails;
-  if (acno in users) {
-
-    if(pswd == users[acno]["password"]){
-      alert("login success");
+  const result=this.dataService.login(acno,pswd)
+  if(result){
+    alert("login success");
       this.router.navigateByUrl("dashboard")
-    }
+  }
+  // let users=this.dataService.accountDetails;
+  // if (acno in users) {
+
+  //   if(pswd == users[acno]["password"]){
+  //     alert("login success");
+  //     this.router.navigateByUrl("dashboard")
+  //   }
   
-    else{
-     alert("incorrect password")//invalid username or password
-    }
-  }
-  else{
-    alert("invalid acount")//invalid account number
-  }
+  //   else{
+  //    alert("incorrect password")//invalid username or password
+  //   }
+  // }
+  // else{
+  //   alert("invalid acount")//invalid account number
+  // }
 }
 register(){
   this.router.navigateByUrl("register");
