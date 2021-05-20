@@ -6,11 +6,11 @@
                 <h4>Welcom to YES Bank<br>
                     <h5>Register Form</h5>
                 </h4><br>
-                <form (ngSubmit)="register()">
-                    <input id="uname" type="text" class="text" [(ngModel)]="uname" placeholder="User name" ><br><br> 
+                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                    <input id="uname" type="text" class="text" formControlName="uname" placeholder="User name" ><br><br> 
 
-                    <input id="accnotext" type="text" name="acno" class="text" [(ngModel)]="acno" placeholder="Account number"> <br><br>
-                    <input id="pwdtext" type="password" name="pswd" class="text" [(ngModel)]="pswd" placeholder="Password"><br><br>
+                    <input id="accnotext" type="text" name="acno" class="text" formControlName="acno" placeholder="Account number"> <br><br>
+                    <input id="pwdtext" type="password" name="pswd" class="text" formControlName="pswd" placeholder="Password"><br><br>
                     <!-- <input type="button" value="Log in" class="button butefct" ><br> -->
                     <!-- <a class="textfp" href="#">Forgot password?</a> -->
                     <div class="line"></div>
