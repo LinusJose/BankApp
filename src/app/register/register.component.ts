@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import{DataService} from '../services/data.service';
 
@@ -15,9 +15,9 @@ export class RegisterComponent implements OnInit {
   pswd="";
 
 registerForm=this.fb.group({
-  uname:[''],
-  acno:[''],
-  pswd:['']
+  uname:['',[Validators.required,Validators.pattern('[a-zA-Z]*')]],
+  acno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
+  pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]]
 })
 
   constructor(private dataService:DataService,private router:Router,private fb:FormBuilder) { }
@@ -25,9 +25,21 @@ registerForm=this.fb.group({
   ngOnInit(): void {
   }
 register(){
+  console.log(this.registerForm.get('uname')?.errors)
+  if(this.registerForm.get('uname')?.errors){
+    alert("username required")
+  }
+  
   // console.log(this.registerForm);
   
   // alert("register clicked");
+  if(this.registerForm.valid)
+{
+  alert("valid form")
+}
+else{
+  alert("invalid form")
+}
   var uname=this.registerForm.value.uname;
   var acno=this.registerForm.value.acno;
   var pswd=this.registerForm.value.pswd;
