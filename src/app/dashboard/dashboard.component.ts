@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -7,35 +8,51 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  dAccno="";
-  dPswd="";
-  dAmount="";
+  depositForm=this.fb.group({
+    accno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
+    pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]],
+    amount:['',[Validators.required,Validators.pattern('[a-zA-Z]*')]]
+  })
+  withdrawForm=this.fb.group({
+    accno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
+    pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]],
+    amount:['',[Validators.required,Validators.pattern('[a-zA-Z]*')]]
 
-  wAccno="";
-  wPswd="";
-  wAmount="";
-  constructor(private dataService:DataService) { }
+  })
+ 
+  constructor(private dataService:DataService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
   deposit(){
-    // alert("credited")
-    var accno=this.dAccno;
-    var pswd=this.dPswd;
-    var amount=this.dAmount
+if(this.depositForm.valid){
+    var accno=this.depositForm.value.acno;
+    var pswd=this.depositForm.value.pswd;
+    var amount=this.depositForm.value.amount;
     const result=this.dataService.deposit(accno,pswd,amount)
     if(result){
       alert("The given amount "+amount+" has been credited..and new balance is: "+result);
     }
   }
+  else{
+    alert("invalid form")
+  }
+}
   withdraw(){
-    var accno=this.wAccno;
-    var pswd=this.wPswd;
-    var amount=this.wAmount
+    if(this.withdrawForm.valid){
+    var accno=this.withdrawForm.value.acno;
+    var pswd=this.withdrawForm.value.pswd;
+    var amount=this.withdrawForm.value.amount;
     const result=this.dataService.withdraw(accno,pswd,amount)
     if(result){
       alert("The given amount "+amount+" has been debited..and new balance is: "+result);
     }
   }
+  
+    else{
+      alert("invalid account")
+    }
+  }
+  
 
 }
