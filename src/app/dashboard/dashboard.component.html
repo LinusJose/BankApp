@@ -1,17 +1,18 @@
 <div class="container">
-    <h1>Welcome User</h1>
+    <h1>Welcome {{user}}</h1>
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4"></div>
             <div class="main"></div>
                 <h4>Deposit Form</h4><br>
                     <form [formGroup]="depositForm" (ngSubmit)="deposit()">
-                        <input id="log" type="text"  class="text" name="accno"FormControlName="acno"placeholder="Account number"> <br><br><br>
+                        <input id="accnotext" type="text"  class="text" name="accno" formControlName="acno"placeholder="Account number"> <br><br><br>
                         <div *ngIf="(depositForm.get('acno')?.touched || depositForm.get('acno')?.dirty) && depositForm.get('acno')?.errors" class="error">Invalid Account Number</div><br>
-                        <input id="pass" type="password"  class="text" name="pswd"FormControlName="pswd" placeholder="Password"><br><br>
+                        <input id="pwdtext" type="password"  class="text" name="pswd" formControlName="pswd" placeholder="Password"><br><br>
                         <div *ngIf="(depositForm.get('pswd')?.touched || depositForm.get('pswd')?.dirty) && depositForm.get('pswd')?.errors" class="error">Invalid Password</div><br>
 
-                        <input id="amo" type="text"  class="text" name="amount" FormControlName="Amount" placeholder="Amount"><br><br>
+                        <input id="amttext" type="text"  class="text" name="amount" formControlName="amount" placeholder="Amount"><br><br>
+                        <div *ngIf="(depositForm.get('amount')?.touched || depositForm.get('amount')?.dirty) && depositForm.get('amount')?.errors" class="error">Invalid Amount</div><br>
 
                     <input type="submit" value="Deposit" class="button butefct"><br><br>
                     </form>
@@ -20,23 +21,29 @@
         </div>
 
         
-        <!-- <div class="container">
+    <div class="container">
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4"></div>
                     <div class="main"></div>
                         <h4>Withdraw Form</h4><br>
-                            <form (ngSubmit)="withdraw()">
-                                <input id="log" type="text"  class="text" name="accno"[(ngModel)]="wAccno" placeholder="Account number"> <br><br><br>
-                                <input id="pass" type="password"  class="text" name="pswd"[(ngModel)]="wPswd"  placeholder="Password"><br><br>
-                                <input id="amo" type="text"  class="text" name="amount" [(ngModel)]="wAmount"  placeholder="Amount"><br><br>
-            
+                            <form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
+
+                        <input id="log" type="text"  class="text" name="accno" formControlName="acno"placeholder="Account number"> <br><br><br>
+                        <div *ngIf="(withdrawForm.get('acno')?.touched || withdrawForm.get('acno')?.dirty) && withdrawForm.get('acno')?.errors" class="error">Invalid Account Number</div><br>
+                        <input id="pass" type="password"  class="text" name="pswd" formControlName="pswd" placeholder="Password"><br><br>
+                        <div *ngIf="(withdrawForm.get('pswd')?.touched || withdrawForm.get('pswd')?.dirty) && withdrawForm.get('pswd')?.errors" class="error">Invalid Password</div><br>
+
+                        <input id="amo" type="text"  class="text" name="amount" formControlName="amount" placeholder="Amount"><br><br>
+                        <div *ngIf="(withdrawForm.get('amount')?.touched || withdrawForm.get('amount')?.dirty) && withdrawForm.get('amount')?.errors" class="error">Invalid Amount</div><br>
+
                                 <input type="submit" value="withdraw" class="button butefct"><br><br>
-                                </form> -->
-                        <!-- </div> -->
-                    <!-- </div>
+                                
+                            </form> 
+                        </div> 
+                    
                     <div class="col-4"></div>
 
-                </div> -->
-            <!-- </div> -->
-
+                </div> 
+        
+ 

@@ -8,19 +8,21 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+ 
   depositForm=this.fb.group({
-    accno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
+    acno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
     pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]],
-    amount:['',[Validators.required,Validators.pattern('[a-zA-Z]*')]]
+    amount:['',[Validators.required,Validators.pattern('[0-9]*')]]
   })
   withdrawForm=this.fb.group({
-    accno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
+    acno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
     pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]],
-    amount:['',[Validators.required,Validators.pattern('[a-zA-Z]*')]]
+    amount:['',[Validators.required,Validators.pattern('[0-9]*')]]
 
   })
- 
-  constructor(private dataService:DataService,private fb:FormBuilder) { }
+ user=this.dataService.currentUser;
+  constructor(private dataService:DataService, private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -50,7 +52,7 @@ if(this.depositForm.valid){
   }
   
     else{
-      alert("invalid account")
+      alert("invalid form")
     }
   }
   

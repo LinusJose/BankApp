@@ -6,19 +6,24 @@
                 <h4>Welcom to YES Bank<br>
                     <h5>{{aim}}</h5>
                 </h4><br>
-                <form [formGroup]="loginForm"(ngSubmit)="login()">
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-                    <input id="accnotext" type="text" name="acno" class="text" formControlName="acno" placeholder="Account number"> <br>
-                    <div *ngIf="(loginForm.get('acno')?.touched || loginForm.get('acno')?.dirty) && loginForm.get('acno')?.errors" class="error">Invalid Account number</div><br>
-                    
-                    <input id="pwdtext" type="password" name="pswd" class="text" formControlName="pswd" placeholder="Password"><br>
-                    <div *ngIf="(loginForm.get('pswd')?.touched || loginForm.get('pswd')?.dirty) && loginForm.get('pswd')?.errors" class="error">Invalid Password</div><br>
-                    
-                    <input type="submit" value="Log in" class="button butefct"><br>
-                    <a class="textfp" href="#">Forgot password?</a><br>
-                    
+                    <input id="accnotext" type="text" name="acno" class="text" formControlName="acno"
+                        placeholder="Account number"> <br><br>
+                    <div *ngIf="(loginForm.get('acno')?.touched || loginForm.get('acno')?.dirty) && loginForm.get('acno')?.errors"
+                        class="error">Invalid Account number</div><br>
+
+                    <input id="pwdtext" type="password" name="pswd" class="text" formControlName="pswd"
+                        placeholder="Password"><br>
+                    <div *ngIf="(loginForm.get('pswd')?.touched || loginForm.get('pswd')?.dirty) && loginForm.get('pswd')?.errors"
+                        class="error">Invalid Password</div><br><br>
+
+                    <input type="submit" value="Log in" class="button butefct"><br><br>
+                    <a class="textfp" href="#">Forgot password?</a><br><br>
+
                     <div class="line"></div>
-                    <input type="submit" value="Create new account" (click)="register()"class="button button1 butefct"><br><br>
+                    <input type="submit" value="Create new account" (click)="register()"
+                        class="button button1 butefct"><br><br>
                 </form>
             </div>
         </div>
