@@ -1,11 +1,17 @@
 <div class="container">
-    <h1>Welcome {{user}}</h1>
+    <h1 appHighlight
+    
+    >Welcome {{user}}</h1>
+    <h4>Login Details (Unformatted):{{lDate}} </h4>
+    <h4>Login Details (Formatted):{{lDate | date| lowercase}} </h4>
+    <h4>Login Details (Formatted):{{lDate | date : 'medium'}} </h4>
+
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4"></div>
-            <div class="main"></div>
+            <div [ngClass]="acno?'style1':'' " class="main">
                 <h4>Deposit Form</h4><br>
-                    <form [formGroup]="depositForm" (ngSubmit)="deposit()">
+                    <form  [formGroup]="depositForm" (ngSubmit)="deposit()">
                         <input id="accnotext" type="text"  class="text" name="accno" formControlName="acno"placeholder="Account number"> <br><br><br>
                         <div *ngIf="(depositForm.get('acno')?.touched || depositForm.get('acno')?.dirty) && depositForm.get('acno')?.errors" class="error">Invalid Account Number</div><br>
                         <input id="pwdtext" type="password"  class="text" name="pswd" formControlName="pswd" placeholder="Password"><br><br>
@@ -17,6 +23,7 @@
                     <input type="submit" value="Deposit" class="button butefct"><br><br>
                     </form>
         </div>
+        </div>
         <div class="col-4"></div>
         </div>
 
@@ -25,7 +32,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4"></div>
-                    <div class="main"></div>
+                    <div [ngClass]="acno? 'style1': '' "  class="main">
                         <h4>Withdraw Form</h4><br>
                             <form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
 
@@ -41,6 +48,10 @@
                                 
                             </form> 
                         </div> 
+                    </div>
+                        <app-delete-confirmation (onDelete)="onDelete($event)" (onCancel)="onCancel()" [item]="acno"></app-delete-confirmation>
+                        <br><br><br>
+                        <button type="submit"  class="button butefct" (click)="deleteAcc()">Delete Account</button><br><br>
                     
                     <div class="col-4"></div>
 

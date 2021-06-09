@@ -2,6 +2,7 @@ import{DataService} from '../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import{Router} from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+// import { resourceLimits } from 'worker_threads';
 
 @Component({
   selector: 'app-login',
@@ -26,13 +27,23 @@ loginForm=this.fb.group({
   
   login(){
     if(this.loginForm.valid){
-  var acno = this.loginForm.value.acno;
-  var pswd=this.loginForm.value.pswd;
-  const result=this.dataService.login(acno,pswd)
+      var acno=this.loginForm.value.acno;
+      var pswd=this.loginForm.value.pswd;
+      
+  this.dataService.login(acno,pswd)
+.subscribe((result:any)=>{
   if(result){
-    alert("login success");
-      this.router.navigateByUrl("dashboard")
+    alert(result.message);
+    localStorage.setItem("name",result.name)
+    localStorage.setItem("acno",result.acno
+    )
+
+    this.router.navigateByUrl("dashboard");
   }
+},
+ (result)=>{
+   alert(result.error.message)
+ })
 }
   else{
     alert("invalid form")

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
@@ -7,6 +8,11 @@ import { Injectable } from '@angular/core';
 })
 export class DataService{ 
   currentUser="";
+  options={
+    withCredentials:true
+  }
+  
+
   accountDetails:any = {
     1000: { acno: 1000,  username: "userone", password: "userone", balance: 50000 },
     1001: { acno: 1001, username: "usertwo", password: "usertwo", balance: 5000 },
@@ -14,7 +20,7 @@ export class DataService{
     1003: { acno: 1003,  username: "userfour", password: "userfour", balance: 6000 }
   };
 
-  constructor() { 
+  constructor(private http:HttpClient) { 
     this.getDetails();
   }
   saveDetails(){
@@ -35,101 +41,47 @@ export class DataService{
   
   }
   register(uname:any,acno:any,pswd:any){
-    let user=this.accountDetails;
-    if(acno in user ){
-      return false;
-      // alert("user exists...pl login")
+    const data={
+      uname,
+      acno,
+      pswd
     }
-    else{
-      user[acno]={
-        acno,
-        username:uname,
-        password:pswd,
-        balance:0
-    }
-    this.saveDetails();
-    return true;
-    // alert("Registration Successfull");
-  
-    // this.router.navigateByUrl("")
-    }
+
+
+    return this.http.post("http://localhost:3000/register",data )
+
   }
 login(acno:any,pswd:any){
-  let users=this.accountDetails;
-  if (acno in users) {
+  const data={
+    acno,
+    pswd
+  }
 
-    if(pswd == users[acno]["password"]){
-      this.currentUser=users[acno]["username"]
-      this.saveDetails();
-      return true;
-      // alert("login success");
-      // this.router.navigateByUrl("dashboard")
-    }
+
+  return this.http.post("http://localhost:3000/login",data,this.options )
   
-    else{
-     alert("incorrect password")//invalid username or password
-     return false;
-    }
+}
+deposit(acno:any,pswd:any,amount:any){
+  const data={
+    acno,
+    pswd,
+    amount
   }
-  else{
-    alert("invalid acount")//invalid account number
-    return false;
+  return this.http.post("http://localhost:3000/deposit",data,this.options )
+}
+
+withdraw(acno:any,pswd:any,amount:any){
+  const data={
+    acno,
+    pswd,
+    amount
   }
-}
-deposit(acno:any,pswd:any,amt:any){
-  var amount=parseInt(amt)
-  let user=this.accountDetails;
-  if (acno in user){
-    if(pswd == user[acno]["password"]){
-      user[acno]["balance"]+=amount;
-      this.saveDetails();
-      return user[acno]["balance"];
-    }
-    else{
-      alert("incorrect password")
-    return false;
-    }
-
-  }
-
-else{
-  alert("invalid account")
-  return false;
-}
+  return this.http.post("http://localhost:3000/withdraw",data,this.options )
 }
 
-withdraw(acno:any,pswd:any,amt:any){
-  var amount=parseInt(amt)
-  let user=this.accountDetails;
-  if (acno in user){
-    if(pswd == user[acno]["password"]){
-
-
-      if(user[acno]["balance"]>amount){
-        user[acno]["balance"]-=amount;
-        this.saveDetails();
-
-      return user[acno]["balance"];
-    }
-    else{
-      alert("in balance")
-    return false;
-    }
-
-  }
-
-else{
-  alert("incrct pswd")
-  return false;
+deleteAccDetails(acno:any){
+  return this.http.delete("http://localhost:3000/deleteAccDetails/"+acno,this.options)
 }
+
 }
-else{
-  alert("inv acnt")
-  return false;
-}
-}
-}
-// function accno(accno: any, any: any, pswd: any, any: any, amt: any, any: any) {
-//   throw new Error('Function not implemented.');
-// }
 

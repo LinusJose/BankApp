@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -21,40 +22,83 @@ export class DashboardComponent implements OnInit {
     amount:['',[Validators.required,Validators.pattern('[0-9]*')]]
 
   })
- user=this.dataService.currentUser;
-  constructor(private dataService:DataService, private fb:FormBuilder) { }
+ user:any;
+ acno:any;
+ lDate:Date=new Date()
+  constructor(private dataService:DataService, private fb:FormBuilder, private router:Router) {
+    this.user=localStorage.getItem("name")
+   }
 
   ngOnInit(): void {
   }
   deposit(){
 if(this.depositForm.valid){
-    var accno=this.depositForm.value.acno;
+    var acno=this.depositForm.value.acno;
     var pswd=this.depositForm.value.pswd;
     var amount=this.depositForm.value.amount;
-    const result=this.dataService.deposit(accno,pswd,amount)
-    if(result){
-      alert("The given amount "+amount+" has been credited..and new balance is: "+result);
+    this.dataService.deposit(acno,pswd,amount)
+    .subscribe((result:any)=>{
+      if(result){
+        alert(result.message);
+      }},
+      (result:any)=>{
+        alert(result.error.message)
+
+      })  
+    } 
+      else{
+        alert("invalid Form")
+
     }
+    
   }
-  else{
-    alert("invalid form")
-  }
-}
+
   withdraw(){
     if(this.withdrawForm.valid){
-    var accno=this.withdrawForm.value.acno;
+    var acno=this.withdrawForm.value.acno;
     var pswd=this.withdrawForm.value.pswd;
     var amount=this.withdrawForm.value.amount;
-    const result=this.dataService.withdraw(accno,pswd,amount)
-    if(result){
-      alert("The given amount "+amount+" has been debited..and new balance is: "+result);
-    }
+
+    this.dataService.withdraw(acno,pswd,amount)
+
+
+    .subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
+      }
+    },
+    (result:any)=>{
+      alert(result.error.message);
+    })
   }
+  
   
     else{
       alert("invalid form")
     }
   }
-  
 
+onDelete(event:any){
+this.dataService.deleteAccDetails(event)
+.subscribe((result:any)=>{
+  if(result){
+
+    alert(result.message)
+    this.router.navigateByUrl("")
+    }
+  },
+  
+  (result:any)=>{
+  alert(result.error.message)
+  })
 }
+onCancel(){
+  this.acno=""
+}
+  
+deleteAcc(){
+     this.acno=localStorage.getItem("acno")
+   } 
+  
+  }
+  
