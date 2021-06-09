@@ -2,8 +2,8 @@
     <h1 appHighlight
     
     >Welcome {{user}}</h1>
-    <h4>Login Details (Unformatted):{{lDate}} </h4>
-    <h4>Login Details (Formatted):{{lDate | date| lowercase}} </h4>
+    <!-- <h4>Login Details (Unformatted):{{lDate}} </h4>
+    <h4>Login Details (Formatted):{{lDate | date| lowercase}} </h4> -->
     <h4>Login Details (Formatted):{{lDate | date : 'medium'}} </h4>
 
     <div class="row">
@@ -26,7 +26,10 @@
         </div>
         <div class="col-4"></div>
         </div>
-
+        <br>
+        
+        <app-animationdemo></app-animationdemo>
+        <br>
         
     <div class="container">
             <div class="row">
@@ -52,9 +55,11 @@
                         <app-delete-confirmation (onDelete)="onDelete($event)" (onCancel)="onCancel()" [item]="acno"></app-delete-confirmation>
                         <br><br><br>
                         <button type="submit"  class="button butefct" (click)="deleteAcc()">Delete Account</button><br><br>
-                    
+                   
+
                     <div class="col-4"></div>
 
                 </div> 
+
         
  

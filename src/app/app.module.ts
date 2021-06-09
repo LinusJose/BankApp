@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import{HttpClientModule} from '@angular/common/http'
 
@@ -12,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 import { HighlightDirective } from './directives/highlight.directive';
+import { AnimationdemoComponent } from './animationdemo/animationdemo.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,11 @@ import { HighlightDirective } from './directives/highlight.directive';
     RegisterComponent,
     DeleteConfirmationComponent,
     HighlightDirective,
+    AnimationdemoComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
