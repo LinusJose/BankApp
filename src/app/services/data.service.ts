@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from } from 'rxjs';
+// import { from } from 'rxjs';
 import{environment} from '../../environments/environment'
 
 
@@ -48,8 +48,9 @@ export class DataService{
       pswd
     }
 
+      // return this.http.post("http://localhost:3000/register",data)
 
-    return this.http.post(environment.apiUrl+"/register",data )
+     return this.http.post(environment.apiUrl+"/register",data )
 
   }
 login(acno:any,pswd:any){
@@ -60,6 +61,9 @@ login(acno:any,pswd:any){
 
 
   return this.http.post(environment.apiUrl+"/login",data,this.options )
+
+  // return this.http.post("http://localhost:3000/login",data,this.options)
+
   
 }
 deposit(acno:any,pswd:any,amount:any){
@@ -69,6 +73,8 @@ deposit(acno:any,pswd:any,amount:any){
     amount
   }
   return this.http.post(environment.apiUrl+"/deposit",data,this.options )
+  // return this.http.post("http://localhost:3000/deposit",data,this.options)
+
 }
 
 withdraw(acno:any,pswd:any,amount:any){
@@ -78,10 +84,15 @@ withdraw(acno:any,pswd:any,amount:any){
     amount
   }
   return this.http.post(environment.apiUrl+"/withdraw",data,this.options )
+  // return this.http.post("http://localhost:3000/withdraw",data,this.options)
+
+
 }
 
 deleteAccDetails(acno:any){
   return this.http.delete(environment.apiUrl+"/deleteAccDetails/"+acno,this.options)
+  // return this.http.post("http://localhost:3000/deleteAccDetails"+acno,this.options)
+
 }
 
 }
